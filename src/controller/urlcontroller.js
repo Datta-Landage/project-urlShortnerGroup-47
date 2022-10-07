@@ -1,6 +1,6 @@
 const Urlmodel = require('../Model/Urlmodel')
 const shortid = require('shortid')
-const validurl = require('valid-url')
+
 
 const redis = require('redis')
 let urlregex=/(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/
@@ -47,7 +47,7 @@ const createshorturl = async (req, res) => {
       let data = JSON.parse(longurlcache)
       console.log("Send from redis cache !")
       let url = data.shortUrl.toLowerCase()
-      return res.status(400).send({ status: false, message: "data from cache", data: url })
+      return res.status(400).send({ status: false, message: "data send  from cache !", data: url })
     }
     let id = shortid.generate()  //hggff
     const Data = new Urlmodel({ longUrl: longUrl, shortUrl: `http://localhost:3000/${id.toLowerCase()}`, urlCode: id })
